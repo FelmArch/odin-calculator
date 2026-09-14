@@ -96,6 +96,39 @@ buttons.addEventListener("click", function (e) {
         }
     }
 
+    if (valor === ".") {
+        if (contaFinalizada || expressao.textContent === "Nem tenta! 😂") {
+            expressao.textContent = "0.";
+            primeiroNumero = "0.";
+            operador = "";
+            segundoNumero = "";
+            contaFinalizada = false;
+            return;
+        }
+
+        if (operador) {
+            if (segundoNumero.includes(".")) return;
+
+            if (!segundoNumero) {
+                segundoNumero = "0.";
+                expressao.textContent += "0.";
+            } else {
+                segundoNumero += ".";
+                expressao.textContent += ".";
+            }
+        } else {
+            if (primeiroNumero.includes(".")) return;
+
+            if (!primeiroNumero) {
+                primeiroNumero = "0.";
+                expressao.textContent = "0.";
+            } else {
+                primeiroNumero += ".";
+                expressao.textContent += ".";
+            }
+        }
+    }
+
     if (!isNaN(valor)) {
         if (contaFinalizada || expressao.textContent === "Nem tenta! 😂") {
             expressao.textContent = "";
