@@ -59,6 +59,43 @@ buttons.addEventListener("click", function (e) {
         return;
     }
 
+    if (valor === "←") {
+        if (contaFinalizada || expressao.textContent === "Nem tenta! 😂") {
+            expressao.textContent = "";
+            resultado.textContent = "";
+            primeiroNumero = "";
+            operador = "";
+            segundoNumero = "";
+            contaFinalizada = false;
+            return;
+        }
+
+        if (segundoNumero) {
+            segundoNumero = segundoNumero.slice(0, -1);
+            expressao.textContent = expressao.textContent.slice(0, -1);
+
+            if (segundoNumero && !(operador === "/" && Number(segundoNumero) === 0)) {
+                resultado.textContent = operate(operador, Number(primeiroNumero), Number(segundoNumero));
+            } else {
+                resultado.textContent = "";
+            }
+            return;
+        }
+
+        if (operador) {
+            operador = "";
+            expressao.textContent = expressao.textContent.trimEnd().slice(0, -1).trimEnd();
+            resultado.textContent = "";
+            return;
+        }
+
+        if (primeiroNumero) {
+            primeiroNumero = primeiroNumero.slice(0, -1);
+            expressao.textContent = expressao.textContent.slice(0, -1);
+            return;
+        }
+    }
+
     if (!isNaN(valor)) {
         if (contaFinalizada || expressao.textContent === "Nem tenta! 😂") {
             expressao.textContent = "";
