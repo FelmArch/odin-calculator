@@ -1,6 +1,7 @@
 let primeiroNumero = "";
 let operador = "";
 let segundoNumero = "";
+let contaFinalizada = false;
 
 const expressao = document.querySelector("#expressao");
 const resultado = document.querySelector("#resultado");
@@ -19,6 +20,9 @@ function multiplicar(a, b) {
 }
 
 function dividir(a, b) {
+    if (b === 0) {
+        return "Nem tenta! 😂";
+    }
     return a / b;
 }
 
@@ -44,14 +48,28 @@ buttons.addEventListener("click", function (e) {
         primeiroNumero = "";
         operador = "";
         segundoNumero = "";
+        contaFinalizada = false;
         return;
     }
 
     if (!isNaN(valor)) {
+        if (contaFinalizada || expressao.textContent === "Nem tenta! 😂") {
+            expressao.textContent = "";
+            primeiroNumero = "";
+            operador = "";
+            segundoNumero = "";
+            contaFinalizada = false;
+        }
+
         if (operador) {
             segundoNumero += valor;
             expressao.textContent += valor;
-            resultado.textContent = operate(operador, Number(primeiroNumero), Number(segundoNumero));
+
+            if (operador === "/" && Number(segundoNumero) === 0) {
+                resultado.textContent = "";
+            } else {
+                resultado.textContent = operate(operador, Number(primeiroNumero), Number(segundoNumero));
+            }
         } else {
             primeiroNumero += valor;
             expressao.textContent += valor;
@@ -59,9 +77,22 @@ buttons.addEventListener("click", function (e) {
     }
 
     if (["+", "-", "*", "/"].includes(valor)) {
+        if (expressao.textContent === "Nem tenta! 😂") return;
+
+        contaFinalizada = false;
+
         if (primeiroNumero) {
             if (operador && segundoNumero) {
                 const conta = operate(operador, Number(primeiroNumero), Number(segundoNumero));
+
+                if (typeof conta === "string") {
+                    expressao.textContent = conta;
+                    resultado.textContent = "";
+                    primeiroNumero = "";
+                    operador = "";
+                    segundoNumero = "";
+                    return;
+                }
                 primeiroNumero = String(conta);
                 segundoNumero = "";
             }
@@ -76,9 +107,15 @@ buttons.addEventListener("click", function (e) {
             const conta = operate(operador, Number(primeiroNumero), Number(segundoNumero));
             expressao.textContent = conta;
             resultado.textContent = "";
-            primeiroNumero = String(conta);
+
+            if (conta === "Nem tenta! 😂") {
+                primeiroNumero = "";
+            } else {
+                primeiroNumero = String(conta);
+            }
             operador = "";
             segundoNumero = "";
+            contaFinalizada = true;
         }
     }
 });
