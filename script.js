@@ -50,18 +50,24 @@ buttons.addEventListener("click", function (e) {
     if (!isNaN(valor)) {
         if (operador) {
             segundoNumero += valor;
-            expressao.textContent = primeiroNumero + " " + operador + " " + segundoNumero;
+            expressao.textContent += valor;
             resultado.textContent = operate(operador, Number(primeiroNumero), Number(segundoNumero));
         } else {
             primeiroNumero += valor;
-            expressao.textContent = primeiroNumero;
+            expressao.textContent += valor;
         }
     }
 
     if (["+", "-", "*", "/"].includes(valor)) {
         if (primeiroNumero) {
+            if (operador && segundoNumero) {
+                const conta = operate(operador, Number(primeiroNumero), Number(segundoNumero));
+                primeiroNumero = String(conta);
+                segundoNumero = "";
+            }
             operador = valor;
-            expressao.textContent = primeiroNumero + " " + operador;
+            expressao.textContent += " " + valor + " ";
+            resultado.textContent = "";
         }
     }
 
