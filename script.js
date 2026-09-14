@@ -1,4 +1,11 @@
 
+let primeiroNumero = "";
+let operador = "";
+let segundoNumero = "";
+
+const display = document.querySelector("#display");
+
+
 function adicionar(a, b) {
     return a + b;
 }
@@ -33,3 +40,4 @@ function operate(operador, a, b) {
         return dividir(a, b);
     }
 }
+
