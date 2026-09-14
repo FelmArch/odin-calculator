@@ -27,15 +27,22 @@ function dividir(a, b) {
 }
 
 function operate(operador, a, b) {
+    let resultadoOperacao;
     if (operador === "+") {
-        return adicionar(a, b);
+        resultadoOperacao = adicionar(a, b);
     } else if (operador === "-") {
-        return subtrair(a, b);
+        resultadoOperacao = subtrair(a, b);
     } else if (operador === "*") {
-        return multiplicar(a, b);
+        resultadoOperacao = multiplicar(a, b);
     } else if (operador === "/") {
-        return dividir(a, b);
+        resultadoOperacao = dividir(a, b);
     }
+
+    if (typeof resultadoOperacao === "string") {
+        return resultadoOperacao;
+    }
+
+    return Math.round(resultadoOperacao * 1000) / 1000;
 }
 
 buttons.addEventListener("click", function (e) {
