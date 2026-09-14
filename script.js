@@ -202,3 +202,23 @@ buttons.addEventListener("click", function (e) {
         }
     }
 });
+
+window.addEventListener("keydown", function (e) {
+    let valor = e.key;
+
+    if (valor === "Enter") {
+        e.preventDefault();
+        valor = "=";
+    } else if (valor === ",") {
+        valor = ".";
+    } else if (valor === "Backspace") {
+        valor = "←";
+    } else if (valor === "Escape" || valor.toLowerCase() === "c") {
+        valor = "C";
+    }
+
+    const botao = document.querySelector(`button[data-valor="${valor}"]`);
+    if (botao) {
+        botao.click();
+    }
+});
