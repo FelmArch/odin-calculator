@@ -89,6 +89,12 @@ buttons.addEventListener("click", function (e) {
         contaFinalizada = false;
 
         if (primeiroNumero) {
+            if (operador && !segundoNumero) {
+                operador = valor;
+                expressao.textContent = expressao.textContent.trimEnd().slice(0, -1) + valor + " ";
+                return;
+            }
+
             if (operador && segundoNumero) {
                 const conta = operate(operador, Number(primeiroNumero), Number(segundoNumero));
 
