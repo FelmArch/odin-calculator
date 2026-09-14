@@ -2,8 +2,10 @@
 let primeiroNumero = "";
 let operador = "";
 let segundoNumero = "";
+let deveResetDisplay = false;
 
-const display = document.querySelector("#display");
+const expressao = document.querySelector("#expressao");
+const resultado = document.querySelector("#resultado");
 const buttons = document.querySelector(".buttons");
 
 
@@ -47,18 +49,31 @@ buttons.addEventListener("click", function (e) {
     if (!valor) return;
 
     if (valor === "C") {
-        display.textContent = "0";
+        resultado.textContent = "0";
+        expressao.textContent = "";
         primeiroNumero = "";
         operador = "";
         segundoNumero = "";
+        return;
     }
 
     if (!isNaN(valor)) {
-        if (display.textContent === "0") {
-            display.textContent = valor;
+        if (resultado.textContent === "0" || deveResetDisplay) {
+            resultado.textContent = valor;
+            deveResetDisplay = false;
         } else {
-            display.textContent += valor;
+            resultado.textContent += valor;
         }
+            expressao.textContent += valor;
+    }
+
+    if (["+", "-", "*", "/"].includes(valor)) {
+        primeiroNumero = resultado.textContent;
+        operador = valor;
+        deveResetDisplay = true;
+        expressao.textContent += " " + valor + " ";
     }
 });
+
+
 

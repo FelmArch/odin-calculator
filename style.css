@@ -20,10 +20,7 @@ body {
     width: 320px;
 }
 
-.display {
-   color: white;
-   font-size: 48px;
-   text-align: right;
+.mostrar {
    padding: 20px 10px;
    word-break: break-all;
 }
@@ -43,6 +40,19 @@ button {
     color: white;
     background-color: #333333;
     transition: background-color 0.3s ease;
+}
+
+.expressao {
+    color: #A5A5A5;
+    font-size: 28px;
+    text-align: right;
+    min-height: 24px;
+}
+
+.resultado {
+    color: white;
+    font-size: 48px;
+    text-align: right;
 }
 
 .btn-operador {
