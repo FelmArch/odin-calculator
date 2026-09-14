@@ -46,13 +46,14 @@ button {
     color: #A5A5A5;
     font-size: 28px;
     text-align: right;
-    min-height: 24px;
+    min-height: 36px;
 }
 
 .resultado {
     color: white;
     font-size: 48px;
     text-align: right;
+    min-height: 60px;
 }
 
 .btn-operador {
