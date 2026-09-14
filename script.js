@@ -44,6 +44,14 @@ function operate(operador, a, b) {
 
 buttons.addEventListener("click", function (e) {
     const valor = e.target.dataset.valor;
+    if (!valor) return;
+
+    if (valor === "C") {
+        display.textContent = "0";
+        primeiroNumero = "";
+        operador = "";
+        segundoNumero = "";
+    }
 
     if (!isNaN(valor)) {
         if (display.textContent === "0") {
