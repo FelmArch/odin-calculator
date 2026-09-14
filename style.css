@@ -44,3 +44,26 @@ button {
     background-color: #333333;
     transition: background-color 0.3s ease;
 }
+
+.btn-operador {
+    background-color: #ff9500;
+}
+
+.btn-igual {
+    background-color: #FF9500;
+    grid-column: 4;            
+    grid-row: span 2;          
+}
+
+.btn-limpar, .btn-voltar {
+    background-color: #A5A5A5;
+    color: #000000;
+}
+
+.btn-zero {
+    grid-column: span 2;
+}
+
+button:hover {
+    opacity: 0.8;
+}
