@@ -1,13 +1,10 @@
-
 let primeiroNumero = "";
 let operador = "";
 let segundoNumero = "";
-let deveResetDisplay = false;
 
 const expressao = document.querySelector("#expressao");
 const resultado = document.querySelector("#resultado");
 const buttons = document.querySelector(".buttons");
-
 
 function adicionar(a, b) {
     return a + b;
@@ -26,19 +23,12 @@ function dividir(a, b) {
 }
 
 function operate(operador, a, b) {
-    // Primeiro, verificamos: o operador é "+"?
     if (operador === "+") {
         return adicionar(a, b);
-
-    // Se não é "+", será que é "-"?
     } else if (operador === "-") {
         return subtrair(a, b);
-
-    // Se não é "-", será que é "*"?
     } else if (operador === "*") {
         return multiplicar(a, b);
-
-    // Se não é "*", será que é "/"?
     } else if (operador === "/") {
         return dividir(a, b);
     }
@@ -49,8 +39,8 @@ buttons.addEventListener("click", function (e) {
     if (!valor) return;
 
     if (valor === "C") {
-        resultado.textContent = "0";
         expressao.textContent = "";
+        resultado.textContent = "";
         primeiroNumero = "";
         operador = "";
         segundoNumero = "";
@@ -58,22 +48,31 @@ buttons.addEventListener("click", function (e) {
     }
 
     if (!isNaN(valor)) {
-        if (resultado.textContent === "0" || deveResetDisplay) {
-            resultado.textContent = valor;
-            deveResetDisplay = false;
+        if (operador) {
+            segundoNumero += valor;
+            expressao.textContent = primeiroNumero + " " + operador + " " + segundoNumero;
+            resultado.textContent = operate(operador, Number(primeiroNumero), Number(segundoNumero));
         } else {
-            resultado.textContent += valor;
+            primeiroNumero += valor;
+            expressao.textContent = primeiroNumero;
         }
-            expressao.textContent += valor;
     }
 
     if (["+", "-", "*", "/"].includes(valor)) {
-        primeiroNumero = resultado.textContent;
-        operador = valor;
-        deveResetDisplay = true;
-        expressao.textContent += " " + valor + " ";
+        if (primeiroNumero) {
+            operador = valor;
+            expressao.textContent = primeiroNumero + " " + operador;
+        }
+    }
+
+    if (valor === "=") {
+        if (primeiroNumero && operador && segundoNumero) {
+            const conta = operate(operador, Number(primeiroNumero), Number(segundoNumero));
+            expressao.textContent = conta;
+            resultado.textContent = "";
+            primeiroNumero = String(conta);
+            operador = "";
+            segundoNumero = "";
+        }
     }
 });
-
-
-
