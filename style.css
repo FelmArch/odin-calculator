@@ -43,10 +43,16 @@ button {
 }
 
 .expressao {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
     color: #A5A5A5;
     font-size: 28px;
     text-align: right;
     min-height: 36px;
+    caret-color: #ff9500;
+    font-family: inherit;
 }
 
 .resultado {
