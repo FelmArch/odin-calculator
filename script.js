@@ -4,6 +4,7 @@ let operador = "";
 let segundoNumero = "";
 
 const display = document.querySelector("#display");
+const buttons = document.querySelector(".buttons");
 
 
 function adicionar(a, b) {
@@ -40,4 +41,16 @@ function operate(operador, a, b) {
         return dividir(a, b);
     }
 }
+
+buttons.addEventListener("click", function (e) {
+    const valor = e.target.dataset.valor;
+
+    if (!isNaN(valor)) {
+        if (display.textContent === "0") {
+            display.textContent = valor;
+        } else {
+            display.textContent += valor;
+        }
+    }
+});
 
